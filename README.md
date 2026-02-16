@@ -13,6 +13,9 @@ The project targets amphibian habitat monitoring in collaboration with SLU Artda
 
 **Self-hosted Cloud** - Mosquitto MQTT broker (TLS on port 8883), Python data store service, TimescaleDB for permanent storage and Grafana for dashboards and alerts.
 
+### System Architecture
+<img width="824" height="1466" alt="OpenHabitat" src="https://github.com/user-attachments/assets/28559429-610d-4262-ae43-d2489fc01608" />
+
 ### C4 Diagrams
 <img width="1271" height="2290" alt="C4 Level 1 -3" src="https://github.com/user-attachments/assets/b2b59ba0-27ff-4f3f-a122-c720bb0d8406" />
 
