@@ -30,3 +30,8 @@ temperature using a DS18B20 sensor over OneWire, and light level via an analog/I
 Field devices transmit JSON payloads to the gateway over LoRa at 868 MHz via STHLM-MESH, with a range of 1–3 km, 125 kHz bandwidth, and ACK confirmation. 
 The gateway forwards validated data to the cloud using MQTT with QoS 1 through a Mosquitto broker secured with TLS on port 8883.
 Grafana queries the cloud database over PostgreSQL, connecting directly to TimescaleDB for time-series visualization.
+
+### Tech Stack
+The field device runs C++ on an Arduino Nano 33 BLE with an ADS1115 ADC, EEPROM for buffering, and a LoRa radio, powered by a 2000 mAh LiPo battery. 
+The gateway is a Raspberry Pi Zero 2W running Python, with InfluxDB for local storage and a LoRa receiver. 
+The cloud is self-hosted using Docker with Mosquitto as MQTT broker, TimescaleDB for permanent time-series storage, Grafana for dashboards, and a Python data store service.
