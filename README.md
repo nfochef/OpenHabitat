@@ -20,3 +20,13 @@ The project targets amphibian habitat monitoring in collaboration with SLU Artda
 <img width="1069" height="553" alt="kopplingsschema" src="https://github.com/user-attachments/assets/c6841524-6b3b-41e9-b03b-1080787a6598" />
 
 
+### Monitored Parameters
+The system measures four water quality indicators: pH and dissolved oxygen (DO) via analog probes on the ADS1115 16-bit ADC and turbidity also through the ADS1115, 
+temperature using a DS18B20 sensor over OneWire, and light level via an analog/I2C light sensor.
+
+
+
+### Communication
+Field devices transmit JSON payloads to the gateway over LoRa at 868 MHz via STHLM-MESH, with a range of 1–3 km, 125 kHz bandwidth, and ACK confirmation. 
+The gateway forwards validated data to the cloud using MQTT with QoS 1 through a Mosquitto broker secured with TLS on port 8883.
+Grafana queries the cloud database over PostgreSQL, connecting directly to TimescaleDB for time-series visualization.
