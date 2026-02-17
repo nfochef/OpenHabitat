@@ -17,7 +17,8 @@ The project targets amphibian habitat monitoring in collaboration with SLU Artda
 <img width="824" height="1466" alt="OpenHabitat" src="https://github.com/user-attachments/assets/28559429-610d-4262-ae43-d2489fc01608" />
 
 ### **C4 Diagrams**
-<img width="1271" height="2290" alt="C4 Level 1 -3" src="https://github.com/user-attachments/assets/b2b59ba0-27ff-4f3f-a122-c720bb0d8406" />
+<img width="1307" height="3457" alt="C4" src="https://github.com/user-attachments/assets/cbebabd4-b8bd-406d-88de-c203796cdecb" />
+
 
 ### **Wiring Schematic**
 <img width="1069" height="553" alt="kopplingsschema" src="https://github.com/user-attachments/assets/c6841524-6b3b-41e9-b03b-1080787a6598" />
