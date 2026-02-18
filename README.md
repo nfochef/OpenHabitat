@@ -20,7 +20,8 @@ The project targets amphibian habitat monitoring in collaboration with SLU Artda
 <img width="1388" height="3096" alt="Group 47" src="https://github.com/user-attachments/assets/89d93769-d7a9-451a-8697-b9485d6c8fd6" />
 
 ### **Wiring Schematic**
-<img width="1069" height="553" alt="kopplingsschema" src="https://github.com/user-attachments/assets/c6841524-6b3b-41e9-b03b-1080787a6598" />
+<img width="999" height="535" alt="kopplingsschema" src="https://github.com/user-attachments/assets/1559f3ec-dded-4ad1-b25b-caa93a9fe0c4" />
+
 
 
 ### Monitored Parameters
