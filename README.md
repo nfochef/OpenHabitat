@@ -5,11 +5,12 @@ Develop and evaluate a complete, open IoT system for monitoring stormwater pond 
 The system continuously measures pH, dissolved oxygen, turbidity, and temperature, and transmits the data wirelessly to a self-hosted backend for storage and visualization.
 
 Scope:
-The project covers the entire IoT chain – from the field sensor node to data visualization:
+The project covers the entire IoT chain, from the field sensor node to data visualization:
 Field node with LoRaWAN communication
 Private network server and message queue
 Data processing, time-series database, and Grafana dashboard
-The system is limited to a single field node located approximately 600 meters from the gateway/server. A mobile app, cloud hosting, and commercial calibration services are not included.
+The system is limited to a single field node located approximately 600 meters from the gateway/server.
+A mobile app, cloud hosting, and commercial calibration services are not included.
 
 Deliverables:
 Functional field unit (sensing + LoRaWAN)
