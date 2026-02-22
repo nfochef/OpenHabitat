@@ -28,7 +28,7 @@ Structured GitHub repository containing firmware, configuration, and infrastruct
 <img width="1332" height="396" alt="GH" src="https://github.com/user-attachments/assets/ffb4e4ed-ba9b-41c1-8b00-7757b2f8a579" />
 
 ### **C4 Diagrams**
-<img width="1388" height="3096" alt="Group 47" src="https://github.com/user-attachments/assets/89d93769-d7a9-451a-8697-b9485d6c8fd6" />
+<img width="761" height="912" alt="C4 lvl 1-3" src="https://github.com/user-attachments/assets/a286a569-5aaa-473f-ae53-86a183f4f818" />
 
 ### **Wiring Schematic**
 <img width="999" height="535" alt="kopplingsschema" src="https://github.com/user-attachments/assets/1559f3ec-dded-4ad1-b25b-caa93a9fe0c4" />
