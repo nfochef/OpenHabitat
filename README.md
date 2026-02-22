@@ -25,7 +25,7 @@ Structured GitHub repository containing firmware, configuration, and infrastruct
 **Self-hosted Cloud** - Mosquitto MQTT broker (TLS on port 8883), Python data store service, TimescaleDB for permanent storage and Grafana for dashboards and alerts.
 
 ### **System Architecture**
-<img width="690" height="1005" alt="Openhabitat" src="https://github.com/user-attachments/assets/70db3c27-c870-4e20-b921-3b9cdccaff06" />
+<img width="1332" height="396" alt="GH" src="https://github.com/user-attachments/assets/ffb4e4ed-ba9b-41c1-8b00-7757b2f8a579" />
 
 ### **C4 Diagrams**
 <img width="1388" height="3096" alt="Group 47" src="https://github.com/user-attachments/assets/89d93769-d7a9-451a-8697-b9485d6c8fd6" />
