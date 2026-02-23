@@ -1,31 +1,31 @@
-# OpenHabitat
-OpenHabitat
-Purpose:
+**Purpose:**
 Develop and evaluate a complete, open IoT system for monitoring stormwater pond quality.
-The system continuously measures pH, dissolved oxygen, turbidity, and temperature, and transmits the data wirelessly to a self-hosted backend for storage and visualization.
+The system continuously measures pH, dissolved oxygen, turbidity, and temperature,
+and transmits the data wirelessly to a self-hosted backend for storage and visualization.
+The system is designed to operate fully offline in remote locations without internet access.
+All infrastructure runs locally on self-hosted hardware, with no dependency on external cloud services or internet connectivity.
 
-Scope:
+**Scope:**
 The project covers the entire IoT chain, from the field sensor node to data visualization:
-Field node with LoRaWAN communication
-Private network server and message queue
-Data processing, time-series database, and Grafana dashboard
-The system is limited to a single field node located approximately 600 meters from the gateway/server.
-A mobile app, cloud hosting, and commercial calibration services are not included.
+- Field node with LoRaWAN communication (868 MHz)
+- Self-hosted LoRaWAN network server and MQTT message queue
+- Data processing, time-series database, and Grafana dashboard
 
-Deliverables:
-Functional field unit (sensing + LoRaWAN)
-Self-hosted backend using Docker Compose
-Grafana dashboard for data visualization
-Technical documentation
-Structured GitHub repository containing firmware, configuration, and infrastructure code
+The system is limited to a single field node located approximately 1-3 Km from
+the gateway. A mobile app, cloud hosting, and commercial calibration services are
+not included. Data loss during connectivity outages is accepted by design.
 
-#### The system consists of three layers:
-**Field Device** - Arduino Nano 33 BLE with water quality sensors, 16-bit ADC, EEPROM buffering, and LiPo battery. Transmits JSON payloads every ~30 minutes via LoRa.
-**Gateway** - Raspberry Pi Zero 2W receives LoRa data, validates and processes measurements, stores locally in InfluxDB (90 days retention), and forwards to cloud via MQTT.
-**Self-hosted Cloud** - Mosquitto MQTT broker (TLS on port 8883), Python data store service, TimescaleDB for permanent storage and Grafana for dashboards and alerts.
+**Deliverables:**
+- Functional field unit (sensing + LoRaWAN transmission)
+- Self-hosted backend using Docker Compose
+- Grafana dashboard for data visualization
+- Technical documentation
+- Structured GitHub repository containing firmware, configuration, and infrastructure code
 
+---
 ### **System Architecture**
 <img width="1332" height="396" alt="GH" src="https://github.com/user-attachments/assets/ffb4e4ed-ba9b-41c1-8b00-7757b2f8a579" />
+The entire stack is self-contained and operates within a local network, making it suitable for deployment in remote areas without internet access.
 
 ### **C4 Diagrams**
 <img width="761" height="912" alt="C4 lvl 1-3" src="https://github.com/user-attachments/assets/a286a569-5aaa-473f-ae53-86a183f4f818" />
@@ -35,17 +35,23 @@ Structured GitHub repository containing firmware, configuration, and infrastruct
 
 
 
-### Monitored Parameters
-The system measures four water quality indicators: pH and dissolved oxygen (DO) via analog probes on the ADS1115 16-bit ADC and turbidity also through the ADS1115, 
-temperature using a DS18B20 sensor over OneWire, and light level via an analog/I2C light sensor.
+The system consists of three layers:
 
+**Field Device** — Arduino Nano 33 BLE Rev2 paired with an RFM95W 868 MHz LoRa radio module.
+Sensors are read through an ADS1115 16-bit ADC for high-precision analog measurements.
+Calibration offsets are stored persistently on an Adafruit I2C EEPROM. Sensor data is
+encoded using Cayenne LPP and transmitted via LoRaWAN with OTAA authentication and
+AES-128 encryption approximately every 30 minutes from a LiPo battery.
 
-### Communication
-Field devices transmit JSON payloads to the gateway over LoRa at 868 MHz via STHLM-MESH, with a range of 1–3 km, 125 kHz bandwidth, and ACK confirmation. 
-The gateway forwards validated data to the cloud using MQTT with QoS 1 through a Mosquitto broker secured with TLS on port 8883.
-Grafana queries the cloud database over PostgreSQL, connecting directly to TimescaleDB for time-series visualization.
+**Gateway** — Raspberry Pi Zero 2W equipped with a Waveshare SX1302 868M HAT,
+running as a LoRaWAN UDP packet forwarder. Received packets are forwarded to the
+self-hosted ChirpStack LoRaWAN network server over the local network.
 
-### Tech Stack
-The field device runs C++ on an Arduino Nano 33 BLE with an ADS1115 ADC, EEPROM for buffering, and a LoRa radio, powered by a 2000 mAh LiPo battery. 
-The gateway is a Raspberry Pi Zero 2W running Python, with InfluxDB for local storage and a LoRa receiver. 
-The cloud is self-hosted using Docker with Mosquitto as MQTT broker, TimescaleDB for permanent time-series storage, Grafana for dashboards, and a Python data store service.
+**Self-hosted Backend** - All services run on Docker Compose:
+- **ChirpStack** - LoRaWAN network server handling device management, OTAA join,
+  and downlink/uplink routing
+- **Eclipse Mosquitto** - MQTT broker receiving decoded uplinks from ChirpStack
+- **Python parser** - Decodes Cayenne LPP payloads and writes structured data
+  to the database
+- **TimescaleDB** - PostgreSQL-based time-series database for permanent sensor storage
+- **Grafana** - Dashboard and alerting for real-time and historical visualization
