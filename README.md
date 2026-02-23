@@ -21,8 +21,8 @@ not included. Data loss during connectivity outages is accepted by design.
 - Grafana dashboard for data visualization
 - Technical documentation
 - Structured GitHub repository containing firmware, configuration, and infrastructure code
----
-## **Design Principles**
+
+**Design Principles**
 
 **Fully self-hosted** - No external services or cloud dependencies. The entire
 pipeline from LoRaWAN network server to dashboard runs on local hardware,
