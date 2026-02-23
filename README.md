@@ -36,10 +36,9 @@ those measurements are discarded. This simplifies the architecture significantly
 TimescaleDB, Grafana) is open-source, ensuring long-term maintainability and
 avoiding vendor lock-in.
 
----
+
 ## **System Architecture**
 <img width="1332" height="396" alt="GH" src="https://github.com/user-attachments/assets/ffb4e4ed-ba9b-41c1-8b00-7757b2f8a579" />
-
 
 ## **C4 Diagrams**
 <img width="761" height="912" alt="C4 lvl 1-3" src="https://github.com/user-attachments/assets/a286a569-5aaa-473f-ae53-86a183f4f818" />
@@ -48,7 +47,7 @@ avoiding vendor lock-in.
 <img width="999" height="535" alt="kopplingsschema" src="https://github.com/user-attachments/assets/1559f3ec-dded-4ad1-b25b-caa93a9fe0c4" />
 
 
----
+
 ## **The system consists of three layers:**
 
 **Field Device** - Arduino Nano 33 BLE Rev2 paired with an RFM95W 868 MHz LoRa radio module.
