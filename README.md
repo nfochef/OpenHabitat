@@ -51,13 +51,13 @@ avoiding vendor lock-in.
 ---
 The system consists of three layers:
 
-**Field Device** — Arduino Nano 33 BLE Rev2 paired with an RFM95W 868 MHz LoRa radio module.
+**Field Device** - Arduino Nano 33 BLE Rev2 paired with an RFM95W 868 MHz LoRa radio module.
 Sensors are read through an ADS1115 16-bit ADC for high-precision analog measurements.
 Calibration offsets are stored persistently on an Adafruit I2C EEPROM. Sensor data is
 encoded using Cayenne LPP and transmitted via LoRaWAN with OTAA authentication and
 AES-128 encryption approximately every 30 minutes from a LiPo battery.
 
-**Gateway** — Raspberry Pi Zero 2W equipped with a Waveshare SX1302 868M HAT,
+**Gateway** - Raspberry Pi Zero 2W equipped with a Waveshare SX1302 868M HAT,
 running as a LoRaWAN UDP packet forwarder. Received packets are forwarded to the
 self-hosted ChirpStack LoRaWAN network server over the local network.
 
