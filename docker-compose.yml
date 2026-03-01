@@ -22,6 +22,17 @@ services:
     networks:
       - openhabitat
 
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: openhabitat-mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+    networks:
+      - openhabitat
+    volumes:
+      - ./config/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
 networks:
   openhabitat:
     driver: bridge
