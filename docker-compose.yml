@@ -4,16 +4,16 @@ services:
     container_name: timescaledb
     restart: unless-stopped
     environment:
-    - POSTGRES_USER=openhabitat
-    - POSTGRES_PASSWORD=dev
-    - POSTGRES_DB=openhabitat
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     volumes:
-    - ./data/postgres:/var/lib/postgresql/data
+      - ./data/postgres:/var/lib/postgresql/data
     networks:
-     - openhabitat
+      - openhabitat
 
     ports:
-    - "5432:5432"
+      - "5432:5432"
 
   redis:
     image: redis:7-alpine
@@ -24,5 +24,5 @@ services:
 
 networks:
   openhabitat:
-    driver: bridge 
+    driver: bridge
 
