@@ -1,0 +1,16 @@
+[logging]
+    level = "info"
+
+[backend]
+    type = "semtech_udp"
+
+    [backend.semtech_udp]
+        udp_bind = "0.0.0.0:1700"
+
+[integration]
+    marshaler = "protobuf"
+
+    [integration.mqtt]
+      server = "tcp://mosquitto:1883"
+      username = "${MQTT_USER}"
+      password = "${MQTT_PASSWORD}"

@@ -1,4 +1,16 @@
 services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: openhabitat-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=chirpstack
+    volumes:
+      - ./data/chirpstack-postgres:/var/lib/postgresql/data
+    networks:
+      - openhabitat
   timescaledb:
     image: timescale/timescaledb:latest-pg16
     container_name: timescaledb
@@ -33,6 +45,28 @@ services:
     volumes:
       - ./config/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
 
+  chripstack-gateway-bridge:
+    image: chirpstack/chirpstack-gateway-bridge:4
+    container_name: openhabitat-gateway-bridge
+    restart: unless-stopped
+    ports:
+      - "1700:1700/udp"
+    volumes:
+      - ./config/chirpstack/gateway-bridge:/etc/chirpstack-gateway-bridge
+    networks:
+      - openhabitat
+
+  chirpstack:
+    image: chirpstack/chirpstack:4
+    container_name: openhabitat-chirpstack
+    restart: unless-stopped
+    command: -c /etc/chirpstack
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config/chirpstack:/etc/chirpstack
+    networks:
+      - openhabitat
 networks:
   openhabitat:
     driver: bridge

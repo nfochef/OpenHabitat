@@ -1,0 +1,12 @@
+[logging]
+  level = "info"
+
+[postgresql]
+  dsn = "postgres://openhabitat:dev@postgres/chirpstack?sslmode=disable"
+
+[redis]
+  servers = ["redis://redis:6379"]
+
+[network]
+  net_id = "000000"
+  enabled_regions = ["eu868"]
