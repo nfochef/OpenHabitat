@@ -8,4 +8,5 @@ turbidity DOUBLE PRECISION,
 battery DOUBLE PRECISION
 );
 
+SELECT create_hypertable('measurements', 'time', if_not_exists => TRUE, migrate_data => TRUE); --this is to convert table into TimescaleDB hypertable, Hypertables are better for time-series data, this will improve performance for queries over time range and automatically partition the data by time internally.
 
