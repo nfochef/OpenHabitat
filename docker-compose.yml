@@ -1,0 +1,30 @@
+version: '3.8' #the version or compose format 
+
+services: #here we will list all the containers we want 
+ timescaledb: #the name of the database
+  image: timescale/timescaledb:latest-pg14 #this tells the docker to download and run TimescaleDB image
+  container_name: database
+  environment:
+   POSTGRES_USER: ${POSTGRES_USER}
+   POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+   POSTGRES_DB: ${POSTGRES_DB}
+
+  ports:
+   - "5432:5432" #Expose PostgreSQL on this port
+
+  volumes:
+   - timescale_data:/var/lib/postgresql/data #timescale_data is the volume name and the rest is where PostgreSQL stores its data inside the container
+
+ grafana:
+  image: grafana/grafana:latest
+  container_name: grafana
+  ports:
+   - "3000:3000"
+  volumes:
+   - grafana_data:/var/lib/grafana
+
+volumes:
+ timescale_data: #decalring the volume
+ grafana_data:
+#volumes are important so that even when we restart the containers ther is bo data loss
+
