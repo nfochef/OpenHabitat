@@ -1,5 +1,3 @@
-version: '3.8' #the version or compose format 
-
 services: #here we will list all the containers we want 
  timescaledb: #the name of the database
   image: timescale/timescaledb:latest-pg14 #this tells the docker to download and run TimescaleDB image
@@ -11,7 +9,8 @@ services: #here we will list all the containers we want
 
   ports:
    - "5432:5432" #Expose PostgreSQL on this port
-
+  networks:
+   - openhabitat
   volumes:
    - timescale_data:/var/lib/postgresql/data #timescale_data is the volume name and the rest is where PostgreSQL stores its data inside the container
 
@@ -20,11 +19,27 @@ services: #here we will list all the containers we want
   container_name: grafana
   ports:
    - "3000:3000"
+  networks:
+   - openhabitat
   volumes:
    - grafana_data:/var/lib/grafana
+
+ mosquitto:
+  image: eclipse-mosquitto:2
+  container_name: openhabitat-mosquitto
+  restart: unless-stopped
+  ports:
+   - "1883:1883"
+  networks:
+   - openhabitat
+  volumes:
+   - ./config/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
 
 volumes:
  timescale_data: #decalring the volume
  grafana_data:
-#volumes are important so that even when we restart the containers ther is bo data loss
+   #Volumes are important so that even when we restart the containers ther is bo data loss
 
+networks:     #DNS resolution, all containers need to be on the same network in order to find each other by name.
+  openhabitat:
+    driver: bridge
