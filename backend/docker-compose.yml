@@ -1,4 +1,18 @@
 services: #here we will list all the containers we want 
+
+ postgres:
+  image: postgres:16-alpine
+  container_name: openhabitat-postgres
+  restart: unless-stopped
+  environment:
+   - POSTGRES_USER=${POSTGRES_USER}
+   - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+   - POSTGRES_DB=chirpstack
+  volumes:
+   - ./data/chirpstack-postgres:/var/lib/postgresql/data
+  networks:
+   - openhabitat
+
  timescaledb: #the name of the database
   image: timescale/timescaledb:latest-pg14 #this tells the docker to download and run TimescaleDB image
   container_name: database
@@ -13,6 +27,14 @@ services: #here we will list all the containers we want
    - openhabitat
   volumes:
    - timescale_data:/var/lib/postgresql/data #timescale_data is the volume name and the rest is where PostgreSQL stores its data inside the container
+
+ redis:
+  image: redis:7-alpine
+  container_name: openhabitat-redis
+  restart: unless-stopped
+  networks:
+   - openhabitat
+
 
  grafana:
   image: grafana/grafana:latest
@@ -33,7 +55,30 @@ services: #here we will list all the containers we want
   networks:
    - openhabitat
   volumes:
-   - ./config/mosquitto://mosquitto/config
+   - ./config/mosquitto:/mosquitto/config
+
+ chirpstack-gateway-bridge:
+  image: chirpstack/chirpstack-gateway-bridge:4
+  container_name: openhabitat-gateway-bridge
+  restart: unless-stopped
+  ports:
+   - "1700:1700/udp"
+  volumes:
+   - ./config/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
+  networks:
+   - openhabitat
+
+ chirpstack:
+  image: chirpstack/chirpstack:4
+  container_name: openhabitat-chirpstack
+  restart: unless-stopped
+  command: -c /etc/chirpstack
+  ports:
+   - "8080:8080"
+  volumes:
+   - ./config/chirpstack:/etc/chirpstack
+  networks:
+   - openhabitat 
 
 volumes:
  timescale_data: #decalring the volume
